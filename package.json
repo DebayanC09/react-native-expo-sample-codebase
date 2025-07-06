@@ -1,0 +1,52 @@
+{
+  "name": "react-native-expo-sample-codebase",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --config .eslintrc.json",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --config .eslintrc.json --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc --noEmit",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "expo": "53.0.17",
+    "expo-dev-client": "5.2.4",
+    "expo-status-bar": "2.2.3",
+    "react": "19.0.0",
+    "react-native": "0.79.5"
+  },
+  "devDependencies": {
+    "@babel/core": "7.25.2",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
+    "@types/react": "19.0.10",
+    "@typescript-eslint/eslint-plugin": "8.35.1",
+    "@typescript-eslint/parser": "8.35.1",
+    "eslint": "8.57.0",
+    "eslint-config-expo": "9.2.0",
+    "eslint-config-prettier": "10.1.5",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-prettier": "5.5.1",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-react-native": "5.0.0",
+    "eslint-plugin-sonarjs": "3.0.4",
+    "husky": "9.1.7",
+    "lint-staged": "16.1.2",
+    "prettier": "3.6.2",
+    "typescript": "5.8.3"
+  },
+  "private": true,
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{js,jsx,ts,tsx,json,css,md}": [
+      "prettier --write"
+    ]
+  }
+}

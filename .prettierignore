@@ -1,0 +1,18 @@
+# Dependencies
+/node_modules
+
+# Expo
+/.expo/
+
+# Build artifacts
+/android/build/
+/ios/build/
+/ios/Pods/
+
+# Lock files
+yarn.lock
+package-lock.json
+Podfile.lock
+
+# Misc
+.DS_Store
