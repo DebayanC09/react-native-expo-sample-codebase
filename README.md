@@ -21,14 +21,30 @@ yarn create expo-app your-project-name --template blank-typescript
 cd your-project-name
 ```
 
-## 2. ESLint and Prettier Setup
+## 2. Configure Git to handle line endings properly
+
+Set Git to checkout files with LF endings and commit with LF:
+
+```bash
+git config --global core.autocrlf false
+git config --global core.eol lf
+```
+
+For just the current repository:
+
+```bash
+git config core.autocrlf false
+git config core.eol lf
+```
+
+## 3. ESLint and Prettier Setup
 
 ### Install ESLint and Prettier Dependencies
 
 Install ESLint, Prettier, and their related plugins and configurations.
 
 ```bash
-yarn add --dev eslint eslint-config-expo eslint-config-prettier eslint-plugin-prettier eslint-plugin-react-native prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-import eslint-plugin-react-hooks eslint-plugin-sonarjs
+yarn add --dev eslint eslint-config-expo eslint-config-prettier eslint-plugin-prettier eslint-plugin-react-native prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-import eslint-plugin-react-hooks eslint-plugin-sonarjs typescript-eslint
 ```
 
 **Package Descriptions:**
@@ -44,113 +60,145 @@ yarn add --dev eslint eslint-config-expo eslint-config-prettier eslint-plugin-pr
 - **eslint-plugin-import**: Supports linting of ES2015+ import/export syntax, and prevents issues with file paths and import order.
 - **eslint-plugin-react-hooks**: Enforces rules of Hooks and checks the exhaustive dependencies for React Hooks.
 - **eslint-plugin-sonarjs**: ESLint plugin for SonarJS rules, which help detect bugs and code smells.
+- **typescript-eslint**: This package provides tooling for ESLint to support TypeScript.
 
 ### Configure ESLint
 
-Create or modify `.eslintrc.json` to configure ESLint with Expo, React Native, and Prettier rules.
+Create or modify `eslint.config.mjs` to configure ESLint with Expo, React Native, and Prettier rules.
 
-**File: `.eslintrc.json`**
+**File: `eslint.config.mjs`**
 
-```json
-{
-  "extends": [
-    "expo",
-    "plugin:react-native/all",
-    "prettier",
-    "plugin:sonarjs/recommended-legacy",
-    "plugin:import/recommended"
-  ],
-  "plugins": [
-    "react-native",
-    "prettier",
-    "sonarjs",
-    "import",
-    "@typescript-eslint",
-    "react-hooks"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "ignorePatterns": ["/dist/*", "node_modules/"],
-  "rules": {
-    "prettier/prettier": ["error", {"singleQuote": false}],
-    "import/no-unresolved": "warn",
-    "react-native/no-inline-styles": "warn",
-    "react-native/no-color-literals": "warn",
-    "react-native/no-raw-text": "off",
-    "react-native/sort-styles": "off",
-    "react/display-name": "off",
-    "sonarjs/no-commented-code": "warn",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "error",
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index",
-          "object",
-          "type"
-        ],
-        "pathGroups": [
-          {
-            "pattern": "react",
-            "group": "external",
-            "position": "before"
+```javascript
+import js from "@eslint/js";
+import reactNative from "eslint-plugin-react-native";
+import prettier from "eslint-plugin-prettier";
+import sonarjs from "eslint-plugin-sonarjs";
+import importPlugin from "eslint-plugin-import";
+import typescript from "@typescript-eslint/eslint-plugin";
+import reactHooks from "eslint-plugin-react-hooks";
+import typescriptParser from "@typescript-eslint/parser";
+import prettierConfig from "eslint-config-prettier";
+
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    ignores: ["/dist/*", "node_modules/"],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    plugins: {
+      "react-native": reactNative,
+      prettier,
+      sonarjs,
+      import: importPlugin,
+      "@typescript-eslint": typescript,
+      "react-hooks": reactHooks,
+    },
+    rules: {
+      // Prettier rules
+      "prettier/prettier": ["error", {singleQuote: false}],
+
+      // Import rules
+      "import/no-unresolved": "warn",
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+            "object",
+            "type",
+          ],
+          pathGroups: [
+            {
+              pattern: "react",
+              group: "external",
+              position: "before",
+            },
+            {
+              pattern: "react-native",
+              group: "external",
+              position: "before",
+            },
+            {
+              pattern: "@react-native/**",
+              group: "external",
+              position: "before",
+            },
+            {
+              pattern: "@/**",
+              group: "internal",
+              position: "before",
+            },
+            {
+              pattern: "~/**",
+              group: "internal",
+              position: "before",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["react", "react-native"],
+          "newlines-between": "always",
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
           },
-          {
-            "pattern": "react-native",
-            "group": "external",
-            "position": "before"
-          },
-          {
-            "pattern": "@react-native/**",
-            "group": "external",
-            "position": "before"
-          },
-          {
-            "pattern": "@/**",
-            "group": "internal",
-            "position": "before"
-          },
-          {
-            "pattern": "~/**",
-            "group": "internal",
-            "position": "before"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["react", "react-native"],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
-    "import/first": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error",
-    "sort-imports": [
-      "error",
-      {
-        "ignoreCase": true,
-        "ignoreDeclarationSort": true,
-        "ignoreMemberSort": false,
-        "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-        "allowSeparatedGroups": true
-      }
-    ]
+        },
+      ],
+      "import/first": "error",
+      "import/newline-after-import": "error",
+      "import/no-duplicates": "error",
+
+      // Sort imports
+      "sort-imports": [
+        "error",
+        {
+          ignoreCase: true,
+          ignoreDeclarationSort: true,
+          ignoreMemberSort: false,
+          memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+          allowSeparatedGroups: true,
+        },
+      ],
+
+      // React Native rules
+      "react-native/no-inline-styles": "warn",
+      "react-native/no-color-literals": "warn",
+      "react-native/no-raw-text": "off",
+      "react-native/sort-styles": "off",
+
+      // React rules
+      "react/display-name": "off",
+
+      // SonarJS rules
+      "sonarjs/no-commented-code": "warn",
+
+      // React Hooks rules
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "error",
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          alwaysTryTypes: true,
+        },
+      },
+    },
   },
-  "settings": {
-    "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
-    }
-  }
-}
+  // Apply Prettier config to disable conflicting rules
+  prettierConfig,
+];
 ```
 
 Create `.eslintignore` to explicitly ignore files from ESLint.
@@ -220,7 +268,7 @@ Podfile.lock
 .DS_Store
 ```
 
-## 3. Husky, Lint-Staged, and Commitlint Setup
+## 4. Husky, Lint-Staged, and Commitlint Setup
 
 ### Install Dependencies
 
@@ -265,7 +313,7 @@ Add the `lint-staged` configuration to your `package.json` to run ESLint and Pre
 ```json
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
+      "eslint --max-warnings 0 --fix"
     ],
     "*.{js,jsx,ts,tsx,json,css,md}": [
       "prettier --write"
@@ -285,7 +333,7 @@ module.exports = {
 };
 ```
 
-## 4. Add Scripts to package.json
+## 5. Add Scripts to package.json
 
 Ensure your `package.json` includes these scripts for convenience.
 
