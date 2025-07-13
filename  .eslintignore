@@ -17,3 +17,6 @@ Podfile.lock
 # Misc
 .DS_Store
 
+#Assets
+/assets/
+

@@ -1,0 +1,1 @@
+export {AuthStackParamList} from "./AuthStackParamList";

@@ -14,6 +14,10 @@ export default [
     files: ["**/*.{js,jsx,ts,tsx}"],
     ignores: ["/dist/*", "node_modules/"],
     languageOptions: {
+      globals: {
+        console: "readonly",
+        process: "readonly",
+      },
       parser: typescriptParser,
       parserOptions: {
         ecmaVersion: "latest",
@@ -127,4 +131,5 @@ export default [
   },
   // Apply Prettier config to disable conflicting rules
   prettierConfig,
+  {},
 ];
