@@ -1,11 +1,15 @@
 import {NavigationContainer} from "@react-navigation/native";
 
-import {AuthNavigation} from "./navigator";
+import {useAuthStore} from "@/store";
+
+import {AuthNavigation, TodoNavigation} from "./navigator";
 
 const Navigation = () => {
+  const {isLoggedIn} = useAuthStore();
+
   return (
     <NavigationContainer>
-      <AuthNavigation />
+      {isLoggedIn ? <TodoNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
 };

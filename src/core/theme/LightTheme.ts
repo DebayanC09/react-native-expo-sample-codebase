@@ -5,6 +5,7 @@ const ERROR = "#ff0000";
 
 export const LightTheme = {
   background: WHITE,
+  primary: "#000000",
 
   textInput: {
     backgroundColor: WHITE,

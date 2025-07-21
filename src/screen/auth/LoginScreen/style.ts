@@ -24,4 +24,8 @@ export const LoginScreenStyle = StyleSheet.create({
     paddingHorizontal: 16,
     gap: 16,
   },
+
+  passwordContainer: {
+    paddingEnd: 16,
+  },
 });

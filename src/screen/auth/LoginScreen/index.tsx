@@ -6,18 +6,21 @@ import {useForm} from "react-hook-form";
 import {Button, KeyboardAvoidingScrollView} from "@/component";
 import {BaseScreen} from "@/core/base";
 import {LoginRequest} from "@/model/auth";
-import {useLoginQuery} from "@/query";
+import {useLoginMutation} from "@/query";
+import {useAuthStore} from "@/store";
+import {showToast} from "@/utils";
 
 import {LoginForm} from "./component";
 import {LoginFormSchema, LoginSchema} from "./schema";
 import {LoginScreenStyle} from "./style";
 
 const LoginScreen = () => {
+  const {setIsLoggedIn, setAccessToken} = useAuthStore();
   const {control, handleSubmit} = useForm<LoginFormSchema>({
     resolver: zodResolver(LoginSchema),
   });
 
-  const {callLogin, isLoginLoading} = useLoginQuery();
+  const {callLogin, isLoginLoading} = useLoginMutation();
 
   const onSubmit = (data: LoginFormSchema) => {
     callLogin(
@@ -28,6 +31,13 @@ const LoginScreen = () => {
       {
         onSuccess: data => {
           console.log(data);
+          if (data.status === 1 && data.user.token) {
+            setIsLoggedIn(true);
+            setAccessToken(data.user.token);
+            showToast(data.message);
+          } else {
+            showToast(data.message);
+          }
         },
         onError: error => {
           console.log(error);

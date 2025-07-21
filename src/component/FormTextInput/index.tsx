@@ -20,6 +20,8 @@ export type FormTextInputProps<T extends FieldValues> = {
   name: Path<T>;
   inputWrapperStyle?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<ViewStyle>;
+  leftView?: React.ReactNode;
+  rightView?: React.ReactNode;
 } & Omit<TextInputProps, "value">;
 
 const FormTextInput = <T extends FieldValues>({
@@ -30,6 +32,8 @@ const FormTextInput = <T extends FieldValues>({
   onBlur,
   inputWrapperStyle,
   inputStyle,
+  leftView,
+  rightView,
   ...rest
 }: FormTextInputProps<T>) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -62,31 +66,35 @@ const FormTextInput = <T extends FieldValues>({
                 {backgroundColor: textInput.backgroundColor},
                 inputWrapperStyle,
               ]}>
-              <TextInput
-                value={controlValue}
-                placeholderTextColor={textInput.placeholderTextColor}
-                onChangeText={value => {
-                  controlOnChange(value);
-                  onChangeText?.(value);
-                }}
-                onBlur={value => {
-                  setIsFocused(false);
-                  controlOnBlur();
-                  onBlur?.(value);
-                }}
-                onFocus={value => {
-                  setIsFocused(true);
-                  onFocus?.(value);
-                }}
-                style={[
-                  FormTextInputStyle.input,
-                  {
-                    color: textInput.textColor,
-                  },
-                  inputStyle,
-                ]}
-                {...rest}
-              />
+              <View style={FormTextInputStyle.inputContainer}>
+                {leftView}
+                <TextInput
+                  value={controlValue}
+                  placeholderTextColor={textInput.placeholderTextColor}
+                  onChangeText={value => {
+                    controlOnChange(value);
+                    onChangeText?.(value);
+                  }}
+                  onBlur={value => {
+                    setIsFocused(false);
+                    controlOnBlur();
+                    onBlur?.(value);
+                  }}
+                  onFocus={value => {
+                    setIsFocused(true);
+                    onFocus?.(value);
+                  }}
+                  style={[
+                    FormTextInputStyle.input,
+                    {
+                      color: textInput.textColor,
+                    },
+                    inputStyle,
+                  ]}
+                  {...rest}
+                />
+                {rightView}
+              </View>
             </View>
             {error && (
               <Text style={{color: textInput.errorBorderColor}}>

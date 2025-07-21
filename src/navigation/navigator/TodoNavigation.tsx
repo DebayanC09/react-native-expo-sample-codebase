@@ -1,26 +1,12 @@
-import {RouteProp, useNavigation, useRoute} from "@react-navigation/native";
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationProp,
-} from "@react-navigation/native-stack";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 import {AddUpdateTodoScreen, TodoListScreen} from "@/screen/todo";
 
-type TodoStackParamList = {
-  TodoListScreen: undefined;
-  AddUpdateTodoScreen: undefined;
-};
+import {TodoStackParamList} from "../type/TodoStackParamList";
 
 const Stack = createNativeStackNavigator<TodoStackParamList>();
 
-export const useTodoNavigation = () =>
-  useNavigation<NativeStackNavigationProp<TodoStackParamList>>();
-
-export const useTodoStackRoute = (): RouteProp<TodoStackParamList> => {
-  return useRoute<RouteProp<TodoStackParamList>>();
-};
-
-export const TodoNavigation = () => {
+const TodoNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName="TodoListScreen"
@@ -35,3 +21,4 @@ export const TodoNavigation = () => {
     </Stack.Navigator>
   );
 };
+export default TodoNavigation;
