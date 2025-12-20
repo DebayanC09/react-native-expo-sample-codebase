@@ -13,7 +13,8 @@
     "type-check": "tsc --noEmit",
     "prepare": "husky",
     "prebuild:android": "npx expo prebuild --platform android",
-    "prebuild:ios": "npx expo prebuild --platform ios"
+    "prebuild:ios": "npx expo prebuild --platform ios",
+    "ncu": "npx npm-check-updates"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
