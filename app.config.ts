@@ -1,6 +1,7 @@
-import {ExpoConfig} from "@expo/config";
+import {ConfigContext, ExpoConfig} from "expo/config";
 
-const appConfig: ExpoConfig = {
+const appConfig = ({config}: ConfigContext): ExpoConfig => ({
+  ...config,
   name: "react-native-expo-sample-codebase",
   slug: "react-native-expo-sample-codebase",
   version: "1.0.0",
@@ -16,6 +17,7 @@ const appConfig: ExpoConfig = {
     supportsTablet: true,
   },
   android: {
+    package: "com.anonymous.reactnativeexposamplecodebase",
     adaptiveIcon: {
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#ffffff",
@@ -24,6 +26,6 @@ const appConfig: ExpoConfig = {
   extra: {
     apiBaseUrl: process.env.EXPO_PUBLIC_API_BASE_URL,
   },
-};
+});
 
 export default appConfig;
