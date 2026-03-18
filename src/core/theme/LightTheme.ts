@@ -1,11 +1,8 @@
-const WHITE = "#ffffff";
-const BLACK = "#000000";
-const PRIMARY = "#000000";
-const ERROR = "#ff0000";
+import {BLACK, ERROR, GRAY, PRIMARY, WHITE} from "@/utils";
 
 export const LightTheme = {
   background: WHITE,
-  primary: "#000000",
+  primary: PRIMARY,
 
   textInput: {
     backgroundColor: WHITE,
@@ -13,7 +10,7 @@ export const LightTheme = {
     activeBorderColor: PRIMARY,
     errorBorderColor: ERROR,
     textColor: BLACK,
-    placeholderTextColor: "gray",
+    placeholderTextColor: GRAY,
   },
 
   button: {

@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-import {Pressable, View} from "react-native";
+import {Pressable, StyleSheet, View} from "react-native";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {Control} from "react-hook-form";
@@ -8,7 +8,6 @@ import {Control} from "react-hook-form";
 import {FormTextInput} from "@/component";
 
 import {LoginFormSchema} from "../schema";
-import {LoginScreenStyle} from "../style";
 
 export type LoginFormProps = {
   control: Control<LoginFormSchema>;
@@ -33,7 +32,7 @@ export const LoginForm = ({control}: LoginFormProps) => {
   };
 
   return (
-    <View style={LoginScreenStyle.container}>
+    <View style={styles.container}>
       <FormTextInput
         control={control}
         name="email"
@@ -46,9 +45,38 @@ export const LoginForm = ({control}: LoginFormProps) => {
         name="password"
         placeholder="Password"
         secureTextEntry={!showPassword}
-        inputWrapperStyle={LoginScreenStyle.passwordContainer}
+        inputWrapperStyle={styles.passwordContainer}
         rightView={passwordRightView()}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 16,
+    width: "100%",
+  },
+  registerButton: {
+    textDecorationLine: "underline",
+  },
+  loadingContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    gap: 16,
+  },
+  passwordContainer: {
+    paddingEnd: 16,
+  },
+});

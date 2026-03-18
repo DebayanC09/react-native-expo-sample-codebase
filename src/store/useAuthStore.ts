@@ -1,5 +1,6 @@
 import {create} from "zustand";
-import {persist, createJSONStorage} from "zustand/middleware";
+import {createJSONStorage, persist} from "zustand/middleware";
+
 import {AUTH_STORAGE_KEY, storageAdapter} from "@/service/local";
 
 interface AuthStore {

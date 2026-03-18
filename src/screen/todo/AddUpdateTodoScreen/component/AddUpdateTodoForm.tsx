@@ -1,11 +1,10 @@
-import {View} from "react-native";
+import {StyleSheet, View} from "react-native";
 
 import {Control} from "react-hook-form";
 
 import {FormTextInput} from "@/component";
 
 import {TodoFormSchema} from "../schema";
-import {AddUpdateTodoScreenStyle} from "../style";
 
 export type AddUpdateTodoFormProps = {
   control: Control<TodoFormSchema>;
@@ -13,7 +12,7 @@ export type AddUpdateTodoFormProps = {
 
 export const AddUpdateTodoForm = ({control}: AddUpdateTodoFormProps) => {
   return (
-    <View style={AddUpdateTodoScreenStyle.formContainer}>
+    <View style={styles.formContainer}>
       <FormTextInput control={control} name="title" placeholder="Title" />
       <FormTextInput
         control={control}
@@ -34,3 +33,11 @@ export const AddUpdateTodoForm = ({control}: AddUpdateTodoFormProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    paddingHorizontal: 16,
+    gap: 32,
+  },
+  formContainer: {gap: 16},
+});

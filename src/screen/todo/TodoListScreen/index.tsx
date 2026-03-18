@@ -1,6 +1,12 @@
 import {useCallback, useState} from "react";
 
-import {FlatList, ListRenderItemInfo, Text, View} from "react-native";
+import {
+  FlatList,
+  ListRenderItemInfo,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
@@ -9,10 +15,9 @@ import {BaseScreen} from "@/core/base";
 import {DeleteTodoRequest, TodoModel} from "@/model/todo";
 import {useTodoNavigation} from "@/navigation/hooks";
 import {useDeleteTodoMutation, useTodoListQuery} from "@/query";
+import {BLACK, WHITE} from "@/utils";
 
 import {TodoType} from "../type";
-
-import {TodoListScreenStyle} from "./style";
 
 const TodoListScreen = () => {
   const {isTodoListLoading, todoListData} = useTodoListQuery();
@@ -25,9 +30,9 @@ const TodoListScreen = () => {
 
   const renderItem = useCallback(
     ({item}: ListRenderItemInfo<TodoModel>) => (
-      <View style={TodoListScreenStyle.itemContainer}>
-        <View style={TodoListScreenStyle.itemHeader}>
-          <Text style={TodoListScreenStyle.title}>{item.title}</Text>
+      <View style={styles.itemContainer}>
+        <View style={styles.itemHeader}>
+          <Text style={styles.title}>{item.title}</Text>
           <MaterialIcons
             name="edit"
             size={24}
@@ -51,7 +56,7 @@ const TodoListScreen = () => {
         </View>
         <Text>{item.description}</Text>
         <Divider />
-        <View style={TodoListScreenStyle.itemFooter}>
+        <View style={styles.itemFooter}>
           <Text>{item.dateTime}</Text>
           <Text>{item.priority}</Text>
         </View>
@@ -69,7 +74,7 @@ const TodoListScreen = () => {
       <FlatList
         data={todoListData?.data ?? []}
         renderItem={renderItem}
-        contentContainerStyle={TodoListScreenStyle.listContentContainer}
+        contentContainerStyle={styles.listContentContainer}
       />
       <Fab
         onPress={() => {
@@ -84,8 +89,6 @@ const TodoListScreen = () => {
         description="Are you sure you want to delete this todo?"
         onConfirm={() => {
           if (selectedTodoId) {
-            // You can now use the selectedTodoId to call your delete function
-            console.log("Deleting item with ID:", selectedTodoId);
             callDeleteTodo({
               todoId: selectedTodoId,
             } satisfies DeleteTodoRequest);
@@ -101,5 +104,31 @@ const TodoListScreen = () => {
     </BaseScreen>
   );
 };
+
+const styles = StyleSheet.create({
+  listContentContainer: {
+    marginHorizontal: 16,
+    paddingBottom: 16,
+  },
+  itemContainer: {
+    backgroundColor: WHITE,
+    marginBottom: 16,
+    padding: 16,
+    gap: 8,
+    borderWidth: 1,
+    borderColor: BLACK,
+    borderRadius: 8,
+  },
+  itemHeader: {flexDirection: "row", gap: 8, alignItems: "center"},
+  itemFooter: {
+    flexDirection: "row",
+    gap: 8,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  title: {
+    flex: 1,
+  },
+});
 
 export default TodoListScreen;

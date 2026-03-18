@@ -1,5 +1,7 @@
 import {useEffect} from "react";
 
+import {StyleSheet} from "react-native";
+
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 
@@ -18,7 +20,6 @@ import {AddUpdateTodoScreenParams, TodoType} from "../type";
 
 import {AddUpdateTodoForm} from "./component";
 import {TodoFormSchema, TodoSchema} from "./schema";
-import {AddUpdateTodoScreenStyle} from "./style";
 
 const AddUpdateTodoScreen = () => {
   const navigation = useTodoNavigation();
@@ -95,7 +96,7 @@ const AddUpdateTodoScreen = () => {
         showBack: true,
       }}>
       <KeyboardAvoidingScrollView
-        contentContainerStyle={AddUpdateTodoScreenStyle.scrollContainer}>
+        contentContainerStyle={styles.scrollContainer}>
         <AddUpdateTodoForm control={control} />
 
         <Button
@@ -107,5 +108,13 @@ const AddUpdateTodoScreen = () => {
     </BaseScreen>
   );
 };
+
+const styles = StyleSheet.create({
+  scrollContainer: {
+    paddingHorizontal: 16,
+    gap: 32,
+  },
+  formContainer: {gap: 16},
+});
 
 export default AddUpdateTodoScreen;

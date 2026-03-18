@@ -1,4 +1,4 @@
-import {Pressable, Text} from "react-native";
+import {Pressable, StyleSheet, Text} from "react-native";
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
@@ -12,7 +12,6 @@ import {showToast} from "@/utils";
 
 import {LoginForm} from "./component";
 import {LoginFormSchema, LoginSchema} from "./schema";
-import {LoginScreenStyle} from "./style";
 
 const LoginScreen = () => {
   const {setIsLoggedIn, setAccessToken} = useAuthStore();
@@ -52,7 +51,7 @@ const LoginScreen = () => {
         title: "Login",
       }}>
       <KeyboardAvoidingScrollView
-        contentContainerStyle={LoginScreenStyle.scrollContainer}>
+        contentContainerStyle={styles.scrollContainer}>
         <LoginForm control={control} />
 
         <Button
@@ -61,11 +60,40 @@ const LoginScreen = () => {
           showLoader={isLoginLoading}
         />
         <Pressable onPress={() => {}}>
-          <Text style={LoginScreenStyle.registerButton}>Register</Text>
+          <Text style={styles.registerButton}>Register</Text>
         </Pressable>
       </KeyboardAvoidingScrollView>
     </BaseScreen>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 16,
+    width: "100%",
+  },
+  registerButton: {
+    textDecorationLine: "underline",
+  },
+  loadingContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    gap: 16,
+  },
+  passwordContainer: {
+    paddingEnd: 16,
+  },
+});
 
 export default LoginScreen;
