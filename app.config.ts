@@ -15,6 +15,7 @@ const appConfig = ({config}: ConfigContext): ExpoConfig => ({
   },
   ios: {
     supportsTablet: true,
+    bundleIdentifier: "com.anonymous.reactnativeexposamplecodebase",
   },
   android: {
     package: "com.anonymous.reactnativeexposamplecodebase",
@@ -22,6 +23,9 @@ const appConfig = ({config}: ConfigContext): ExpoConfig => ({
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#ffffff",
     },
+  },
+  web: {
+    favicon: "./assets/favicon.png",
   },
   extra: {
     apiBaseUrl: process.env.EXPO_PUBLIC_API_BASE_URL,
