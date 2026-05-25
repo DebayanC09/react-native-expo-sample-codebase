@@ -1,21 +1,15 @@
 import {useCallback, useState} from "react";
 
-import {
-  FlatList,
-  ListRenderItemInfo,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import {FlatList, ListRenderItemInfo, StyleSheet, View} from "react-native";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
-import {AlertModal, Divider, Fab} from "@/component";
+import {AlertModal, AppText, Divider, Fab} from "@/component";
 import {BaseScreen} from "@/core/base";
 import {DeleteTodoRequest, TodoModel} from "@/model/todo";
 import {useTodoNavigation} from "@/navigation/hooks";
 import {useDeleteTodoMutation, useTodoListQuery} from "@/query";
-import {BLACK, WHITE} from "@/utils";
+import {AppColor} from "@/utils";
 
 import {TodoType} from "../type";
 
@@ -32,7 +26,7 @@ const TodoListScreen = () => {
     ({item}: ListRenderItemInfo<TodoModel>) => (
       <View style={styles.itemContainer}>
         <View style={styles.itemHeader}>
-          <Text style={styles.title}>{item.title}</Text>
+          <AppText style={styles.title}>{item.title}</AppText>
           <MaterialIcons
             name="edit"
             size={24}
@@ -54,11 +48,11 @@ const TodoListScreen = () => {
             }}
           />
         </View>
-        <Text>{item.description}</Text>
+        <AppText>{item.description}</AppText>
         <Divider />
         <View style={styles.itemFooter}>
-          <Text>{item.dateTime}</Text>
-          <Text>{item.priority}</Text>
+          <AppText>{item.dateTime}</AppText>
+          <AppText>{item.priority}</AppText>
         </View>
       </View>
     ),
@@ -111,12 +105,12 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   itemContainer: {
-    backgroundColor: WHITE,
+    backgroundColor: AppColor.WHITE,
     marginBottom: 16,
     padding: 16,
     gap: 8,
     borderWidth: 1,
-    borderColor: BLACK,
+    borderColor: AppColor.BLACK,
     borderRadius: 8,
   },
   itemHeader: {flexDirection: "row", gap: 8, alignItems: "center"},

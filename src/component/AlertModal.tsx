@@ -1,6 +1,8 @@
 import React from "react";
 
-import {Modal, StyleSheet, Text, View} from "react-native";
+import {Modal, StyleSheet, View} from "react-native";
+
+import AppText from "./AppText";
 
 interface AlertModalProps {
   visible: boolean;
@@ -29,11 +31,11 @@ const AlertModal: React.FC<AlertModalProps> = ({
       onRequestClose={onCancel}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text>{title}</Text>
-          <Text>{description}</Text>
+          <AppText>{title}</AppText>
+          <AppText>{description}</AppText>
           <View style={styles.buttonContainer}>
-            <Text onPress={onCancel}>{cancelText}</Text>
-            <Text onPress={onConfirm}>{confirmText}</Text>
+            <AppText onPress={onCancel}>{cancelText}</AppText>
+            <AppText onPress={onConfirm}>{confirmText}</AppText>
           </View>
         </View>
       </View>

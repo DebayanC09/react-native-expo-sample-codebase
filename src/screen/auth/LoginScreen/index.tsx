@@ -1,9 +1,9 @@
-import {Pressable, StyleSheet, Text} from "react-native";
+import {Pressable, StyleSheet} from "react-native";
 
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 
-import {AppButton, KeyboardAvoidingScrollView} from "@/component";
+import {AppButton, AppText, KeyboardAvoidingScrollView} from "@/component";
 import {BaseScreen} from "@/core/base";
 import {LoginRequest} from "@/model/auth";
 import {useLoginMutation} from "@/query";
@@ -60,7 +60,7 @@ const LoginScreen = () => {
           showLoader={isLoginLoading}
         />
         <Pressable onPress={() => {}}>
-          <Text style={styles.registerButton}>Register</Text>
+          <AppText style={styles.registerButton}>Register</AppText>
         </Pressable>
       </KeyboardAvoidingScrollView>
     </BaseScreen>

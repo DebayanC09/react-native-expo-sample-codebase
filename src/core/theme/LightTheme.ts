@@ -1,36 +1,30 @@
-const WHITE = "#ffffff";
-const BLACK = "#000000";
-const PRIMARY = "#000000";
-const ERROR = "#ff0000";
-const GRAY = "#808080";
-
-//////////////////////////////////////////////////////////
+import {AppColor} from "@/utils";
 
 export const LightTheme = {
-  background: WHITE,
-  primary: PRIMARY,
+  background: AppColor.WHITE,
+  primary: AppColor.PRIMARY,
 
   textInput: {
-    backgroundColor: WHITE,
-    borderColor: GRAY,
-    activeBorderColor: PRIMARY,
-    errorBorderColor: ERROR,
-    textColor: BLACK,
-    placeholderTextColor: GRAY,
+    backgroundColor: AppColor.WHITE,
+    borderColor: AppColor.GRAY,
+    activeBorderColor: AppColor.PRIMARY,
+    errorBorderColor: AppColor.ERROR,
+    textColor: AppColor.BLACK,
+    placeholderTextColor: AppColor.GRAY,
   },
 
   button: {
-    backgroundColor: PRIMARY,
-    textColor: WHITE,
+    backgroundColor: AppColor.PRIMARY,
+    textColor: AppColor.WHITE,
     borderRadius: 8,
     padding: 8,
   },
 
   text: {
     color: {
-      primary: BLACK,
-      secondary: GRAY,
-      error: ERROR,
+      primary: AppColor.BLACK,
+      secondary: AppColor.GRAY,
+      error: AppColor.ERROR,
     },
   },
 };

@@ -3,13 +3,14 @@ import {
   Pressable,
   StyleProp,
   StyleSheet,
-  Text,
   TextStyle,
   View,
   ViewStyle,
 } from "react-native";
 
 import useAppTheme from "@/core/theme";
+
+import AppText from "./AppText";
 
 type ButtonProps = {
   title: string;
@@ -40,7 +41,9 @@ const AppButton = ({
         {showLoader && (
           <ActivityIndicator size="small" color={button.textColor} />
         )}
-        <Text style={[{color: button.textColor}, textStyle]}>{title}</Text>
+        <AppText style={[{color: button.textColor}, textStyle]}>
+          {title}
+        </AppText>
       </View>
     </Pressable>
   );

@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import {
   StyleProp,
   StyleSheet,
-  Text,
   TextInput,
   TextInputProps,
   View,
@@ -13,6 +12,8 @@ import {
 import {Control, Controller, FieldValues, Path} from "react-hook-form";
 
 import useAppTheme from "@/core/theme";
+
+import AppText from "./AppText";
 
 export type FormTextInputProps<T extends FieldValues> = {
   control: Control<T>;
@@ -96,9 +97,9 @@ const FormTextInput = <T extends FieldValues>({
               </View>
             </View>
             {error && (
-              <Text style={{color: textInput.errorBorderColor}}>
+              <AppText style={{color: textInput.errorBorderColor}}>
                 {error.message}
-              </Text>
+              </AppText>
             )}
           </View>
         );

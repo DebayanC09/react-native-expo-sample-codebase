@@ -1,9 +1,11 @@
 import React, {useCallback, useMemo, useState} from "react";
 
-import {LayoutChangeEvent, Pressable, Text, View} from "react-native";
+import {LayoutChangeEvent, Pressable, View} from "react-native";
 
 import {useNavigation} from "@react-navigation/native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+
+import {AppText} from "@/component";
 
 import {Back, Menu} from "assets/svg";
 
@@ -90,12 +92,12 @@ const AppBar = ({
       };
       return (
         <View style={[BaseAppBarStyle.titleContainer, titleMargin]}>
-          <Text
+          <AppText
             numberOfLines={2}
             ellipsizeMode="tail"
             style={BaseAppBarStyle.title}>
             {title}
-          </Text>
+          </AppText>
         </View>
       );
     }

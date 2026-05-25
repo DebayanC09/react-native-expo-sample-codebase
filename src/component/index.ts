@@ -4,3 +4,4 @@ export {default as KeyboardAvoidingScrollView} from "./KeyboardAvoidingScrollVie
 export {default as Divider} from "./Divider";
 export {default as Fab} from "./Fab";
 export {default as AlertModal} from "./AlertModal";
+export {default as AppText} from "./AppText";
