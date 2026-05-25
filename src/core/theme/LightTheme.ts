@@ -1,4 +1,10 @@
-import {BLACK, ERROR, GRAY, PRIMARY, WHITE} from "@/utils";
+const WHITE = "#ffffff";
+const BLACK = "#000000";
+const PRIMARY = "#000000";
+const ERROR = "#ff0000";
+const GRAY = "#808080";
+
+//////////////////////////////////////////////////////////
 
 export const LightTheme = {
   background: WHITE,
@@ -6,7 +12,7 @@ export const LightTheme = {
 
   textInput: {
     backgroundColor: WHITE,
-    borderColor: "gray",
+    borderColor: GRAY,
     activeBorderColor: PRIMARY,
     errorBorderColor: ERROR,
     textColor: BLACK,
@@ -21,6 +27,10 @@ export const LightTheme = {
   },
 
   text: {
-    color: BLACK,
+    color: {
+      primary: BLACK,
+      secondary: GRAY,
+      error: ERROR,
+    },
   },
 };

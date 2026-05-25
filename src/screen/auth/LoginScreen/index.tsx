@@ -3,7 +3,7 @@ import {Pressable, StyleSheet, Text} from "react-native";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 
-import {Button, KeyboardAvoidingScrollView} from "@/component";
+import {AppButton, KeyboardAvoidingScrollView} from "@/component";
 import {BaseScreen} from "@/core/base";
 import {LoginRequest} from "@/model/auth";
 import {useLoginMutation} from "@/query";
@@ -54,7 +54,7 @@ const LoginScreen = () => {
         contentContainerStyle={styles.scrollContainer}>
         <LoginForm control={control} />
 
-        <Button
+        <AppButton
           title="Login"
           onPress={handleSubmit(onSubmit)}
           showLoader={isLoginLoading}

@@ -19,7 +19,7 @@ type ButtonProps = {
   textStyle?: StyleProp<TextStyle>;
 };
 
-const Button = ({
+const AppButton = ({
   title,
   onPress,
   showLoader = false,
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export default AppButton;

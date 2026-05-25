@@ -5,7 +5,7 @@ import {StyleSheet} from "react-native";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form";
 
-import {Button, KeyboardAvoidingScrollView} from "@/component";
+import {AppButton, KeyboardAvoidingScrollView} from "@/component";
 import {BaseScreen} from "@/core/base";
 import {TodoModel} from "@/model/todo";
 import {useTodoNavigation, useTodoStackRoute} from "@/navigation/hooks";
@@ -99,7 +99,7 @@ const AddUpdateTodoScreen = () => {
         contentContainerStyle={styles.scrollContainer}>
         <AddUpdateTodoForm control={control} />
 
-        <Button
+        <AppButton
           showLoader={isAddTodoLoading || isUpdateTodoLoading}
           title={type === TodoType.ADD ? "Add" : "Update"}
           onPress={handleSubmit(onSubmit)}
