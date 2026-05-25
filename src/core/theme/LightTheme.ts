@@ -27,4 +27,20 @@ export const LightTheme = {
       error: AppColor.ERROR,
     },
   },
+
+  alertModal: {
+    backgroundColor: AppColor.WHITE,
+    titleColor: AppColor.BLACK,
+    descriptionColor: AppColor.GRAY,
+    buttonTextColor: {
+      confirm: AppColor.PRIMARY,
+      cancel: AppColor.GRAY,
+    },
+    centeredView: {
+      backgroundColor: "rgba(0,0,0,0.5)",
+    },
+    modalView: {
+      backgroundColor: AppColor.WHITE,
+    },
+  },
 };

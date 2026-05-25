@@ -2,6 +2,8 @@ import React from "react";
 
 import {Modal, StyleSheet, View} from "react-native";
 
+import useAppTheme from "@/core/theme";
+
 import AppText from "./AppText";
 
 interface AlertModalProps {
@@ -23,19 +25,40 @@ const AlertModal: React.FC<AlertModalProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  const {alertModal} = useAppTheme();
   return (
     <Modal
       transparent={true}
       animationType="fade"
       visible={visible}
       onRequestClose={onCancel}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <AppText>{title}</AppText>
-          <AppText>{description}</AppText>
+      <View
+        style={[
+          styles.centeredView,
+          {backgroundColor: alertModal.centeredView.backgroundColor},
+        ]}>
+        <View
+          style={[
+            styles.modalView,
+            {backgroundColor: alertModal.modalView.backgroundColor},
+          ]}>
+          <AppText style={[styles.title, {color: alertModal.titleColor}]}>
+            {title}
+          </AppText>
+          <AppText style={{color: alertModal.descriptionColor}}>
+            {description}
+          </AppText>
           <View style={styles.buttonContainer}>
-            <AppText onPress={onCancel}>{cancelText}</AppText>
-            <AppText onPress={onConfirm}>{confirmText}</AppText>
+            <AppText
+              style={{color: alertModal.buttonTextColor.cancel}}
+              onPress={onCancel}>
+              {cancelText}
+            </AppText>
+            <AppText
+              style={{color: alertModal.buttonTextColor.confirm}}
+              onPress={onConfirm}>
+              {confirmText}
+            </AppText>
           </View>
         </View>
       </View>
@@ -48,25 +71,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalView: {
-    backgroundColor: "white",
     borderRadius: 10,
     padding: 24,
     width: "80%",
     elevation: 5,
     gap: 8,
   },
-  modalTitle: {
+  title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 15,
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
   },
   buttonContainer: {
     flexDirection: "row",
