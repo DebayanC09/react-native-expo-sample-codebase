@@ -43,4 +43,13 @@ export const LightTheme = {
       backgroundColor: AppColor.WHITE,
     },
   },
+
+  fab: {
+    backgroundColor: AppColor.PRIMARY,
+    iconColor: AppColor.WHITE,
+  },
+
+  divider: {
+    backgroundColor: AppColor.GRAY,
+  },
 };

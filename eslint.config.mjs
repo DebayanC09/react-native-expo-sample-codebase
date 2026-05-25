@@ -45,6 +45,7 @@ export default [
 
       // Import rules
       "import/no-unresolved": "warn",
+      "no-unused-vars": "off",
       "import/order": [
         "error",
         {

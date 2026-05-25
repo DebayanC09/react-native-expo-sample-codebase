@@ -1,4 +1,4 @@
-import {TodoModel} from './TodoModel';
+import {TodoModel} from "./TodoModel";
 
 export interface TodoListResponse {
   statusCode: number;

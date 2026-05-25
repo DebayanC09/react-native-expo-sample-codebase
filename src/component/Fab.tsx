@@ -2,13 +2,17 @@ import {Pressable, StyleSheet, View} from "react-native";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
+import useAppTheme from "@/core/theme";
+
 type FabProps = {onPress?: () => void};
 
 const Fab = ({onPress}: FabProps) => {
+  const {fab} = useAppTheme();
+
   return (
     <Pressable onPress={onPress}>
-      <View style={styles.fab}>
-        <MaterialIcons name="add" size={24} color="white" />
+      <View style={[styles.fab, {backgroundColor: fab.backgroundColor}]}>
+        <MaterialIcons name="add" size={24} color={fab.iconColor} />
       </View>
     </Pressable>
   );
@@ -19,7 +23,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 32,
     right: 16,
-    backgroundColor: "black",
     borderRadius: 50,
     padding: 16,
   },
