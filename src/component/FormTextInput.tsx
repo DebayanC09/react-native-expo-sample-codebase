@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import {
   StyleProp,
+  StyleSheet,
   Text,
   TextInput,
   TextInputProps,
@@ -12,8 +13,6 @@ import {
 import {Control, Controller, FieldValues, Path} from "react-hook-form";
 
 import useAppTheme from "@/core/theme";
-
-import {FormTextInputStyle} from "./style";
 
 export type FormTextInputProps<T extends FieldValues> = {
   control: Control<T>;
@@ -61,12 +60,12 @@ const FormTextInput = <T extends FieldValues>({
           <View>
             <View
               style={[
-                FormTextInputStyle.inputWrapper,
+                styles.inputWrapper,
                 {borderColor},
                 {backgroundColor: textInput.backgroundColor},
                 inputWrapperStyle,
               ]}>
-              <View style={FormTextInputStyle.inputContainer}>
+              <View style={styles.inputContainer}>
                 {leftView}
                 <TextInput
                   value={controlValue}
@@ -85,7 +84,7 @@ const FormTextInput = <T extends FieldValues>({
                     onFocus?.(value);
                   }}
                   style={[
-                    FormTextInputStyle.input,
+                    styles.input,
                     {
                       color: textInput.textColor,
                     },
@@ -107,5 +106,23 @@ const FormTextInput = <T extends FieldValues>({
     />
   );
 };
+
+const styles = StyleSheet.create({
+  inputWrapper: {
+    width: "100%",
+    borderRadius: 5,
+    borderWidth: 1,
+  },
+  input: {
+    flex: 1,
+    minHeight: 48,
+
+    paddingHorizontal: 12,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+});
 
 export default FormTextInput;

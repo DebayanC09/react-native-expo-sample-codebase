@@ -5,10 +5,9 @@ import {
   Platform,
   ScrollView,
   StyleProp,
+  StyleSheet,
   ViewStyle,
 } from "react-native";
-
-import {KeyboardAvoidingScrollViewStyle} from "./style";
 
 interface KeyboardAvoidingScrollViewProps {
   children: React.ReactNode;
@@ -23,10 +22,7 @@ const KeyboardAvoidingScrollView = ({
 }: KeyboardAvoidingScrollViewProps) => {
   return (
     <KeyboardAvoidingView
-      style={[
-        KeyboardAvoidingScrollViewStyle.container,
-        keyboardAvoidingViewStyle,
-      ]}
+      style={[styles.container, keyboardAvoidingViewStyle]}
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ScrollView contentContainerStyle={contentContainerStyle}>
         {children}
@@ -34,5 +30,11 @@ const KeyboardAvoidingScrollView = ({
     </KeyboardAvoidingView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default KeyboardAvoidingScrollView;

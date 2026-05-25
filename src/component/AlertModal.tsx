@@ -1,8 +1,6 @@
 import React from "react";
 
-import {Modal, Text, View} from "react-native";
-
-import {AlertModalStyle} from "./style";
+import {Modal, StyleSheet, Text, View} from "react-native";
 
 interface AlertModalProps {
   visible: boolean;
@@ -29,11 +27,11 @@ const AlertModal: React.FC<AlertModalProps> = ({
       animationType="fade"
       visible={visible}
       onRequestClose={onCancel}>
-      <View style={AlertModalStyle.centeredView}>
-        <View style={AlertModalStyle.modalView}>
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
           <Text>{title}</Text>
           <Text>{description}</Text>
-          <View style={AlertModalStyle.buttonContainer}>
+          <View style={styles.buttonContainer}>
             <Text onPress={onCancel}>{cancelText}</Text>
             <Text onPress={onConfirm}>{confirmText}</Text>
           </View>
@@ -42,5 +40,37 @@ const AlertModal: React.FC<AlertModalProps> = ({
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    padding: 24,
+    width: "80%",
+    elevation: 5,
+    gap: 8,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    gap: 16,
+    justifyContent: "flex-end",
+  },
+});
 
 export default AlertModal;

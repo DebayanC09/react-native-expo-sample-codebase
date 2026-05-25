@@ -2,6 +2,7 @@ import {
   ActivityIndicator,
   Pressable,
   StyleProp,
+  StyleSheet,
   Text,
   TextStyle,
   View,
@@ -9,8 +10,6 @@ import {
 } from "react-native";
 
 import useAppTheme from "@/core/theme";
-
-import {ButtonStyle} from "./style";
 
 type ButtonProps = {
   title: string;
@@ -32,12 +31,12 @@ const Button = ({
     <Pressable
       disabled={showLoader}
       style={[
-        ButtonStyle.button,
+        styles.button,
         {backgroundColor: button.backgroundColor},
         wrapperStyle,
       ]}
       onPress={onPress}>
-      <View style={ButtonStyle.buttonTextContainer}>
+      <View style={styles.buttonTextContainer}>
         {showLoader && (
           <ActivityIndicator size="small" color={button.textColor} />
         )}
@@ -46,5 +45,21 @@ const Button = ({
     </Pressable>
   );
 };
+
+const styles = StyleSheet.create({
+  buttonTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 16,
+  },
+  button: {
+    width: "100%",
+    height: 48,
+    borderRadius: 5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default Button;
