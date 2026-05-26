@@ -4,6 +4,7 @@ const appConfig = ({config}: ConfigContext): ExpoConfig => ({
   ...config,
   name: "react-native-expo-sample-codebase",
   slug: "react-native-expo-sample-codebase",
+  scheme: "rnexposample",
   version: "1.0.0",
   orientation: "portrait",
   icon: "./assets/icon.png",
@@ -30,6 +31,7 @@ const appConfig = ({config}: ConfigContext): ExpoConfig => ({
   extra: {
     apiBaseUrl: process.env.EXPO_PUBLIC_API_BASE_URL,
   },
+  plugins: ["expo-router"],
 });
 
 export default appConfig;

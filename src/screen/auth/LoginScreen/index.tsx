@@ -1,6 +1,7 @@
 import {Pressable, StyleSheet} from "react-native";
 
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useRouter} from "expo-router";
 import {useForm} from "react-hook-form";
 
 import {AppButton, AppText, KeyboardAvoidingScrollView} from "@/component";
@@ -14,6 +15,7 @@ import {LoginForm} from "./component";
 import {LoginFormSchema, LoginSchema} from "./schema";
 
 const LoginScreen = () => {
+  const router = useRouter();
   const {setIsLoggedIn, setAccessToken} = useAuthStore();
   const {control, handleSubmit} = useForm<LoginFormSchema>({
     resolver: zodResolver(LoginSchema),
@@ -34,6 +36,7 @@ const LoginScreen = () => {
             setIsLoggedIn(true);
             setAccessToken(data.user.token);
             showToast(data.message);
+            router.replace("/(todo)");
           } else {
             showToast(data.message);
           }
@@ -59,7 +62,7 @@ const LoginScreen = () => {
           onPress={handleSubmit(onSubmit)}
           showLoader={isLoginLoading}
         />
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={() => router.push("/(auth)/register")}>
           <AppText style={styles.registerButton}>Register</AppText>
         </Pressable>
       </KeyboardAvoidingScrollView>

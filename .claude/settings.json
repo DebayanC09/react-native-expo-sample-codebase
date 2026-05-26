@@ -1,5 +1,6 @@
 {
   "enabledPlugins": {
-    "expo@expo-plugins": true
+    "expo@expo-plugins": true,
+    "expo@claude-plugins-official": true
   }
 }

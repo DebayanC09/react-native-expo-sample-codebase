@@ -3,12 +3,12 @@ import {useEffect} from "react";
 import {StyleSheet} from "react-native";
 
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useLocalSearchParams, useRouter} from "expo-router";
 import {useForm} from "react-hook-form";
 
 import {AppButton, KeyboardAvoidingScrollView} from "@/component";
 import {BaseScreen} from "@/core/base";
 import {TodoModel} from "@/model/todo";
-import {useTodoNavigation, useTodoStackRoute} from "@/navigation/hooks";
 import {
   useAddTodoMutation,
   useTodoDetailsQuery,
@@ -16,15 +16,17 @@ import {
 } from "@/query";
 import {showToast} from "@/utils";
 
-import {AddUpdateTodoScreenParams, TodoType} from "../type";
+import {TodoType} from "../type";
 
 import {AddUpdateTodoForm} from "./component";
 import {TodoFormSchema, TodoSchema} from "./schema";
 
 const AddUpdateTodoScreen = () => {
-  const navigation = useTodoNavigation();
-  const {params} = useTodoStackRoute();
-  const {type, todoId} = params as AddUpdateTodoScreenParams;
+  const router = useRouter();
+  const {type, todoId} = useLocalSearchParams<{
+    type: TodoType;
+    todoId?: string;
+  }>();
 
   const {isTodoDetailsLoading, todoDetailsData} = useTodoDetailsQuery(
     todoId,
@@ -51,7 +53,7 @@ const AddUpdateTodoScreen = () => {
         {
           onSuccess: response => {
             showToast(response.message);
-            navigation.goBack();
+            router.back();
           },
           onError: error => {
             showToast(error.message);
@@ -69,7 +71,7 @@ const AddUpdateTodoScreen = () => {
         {
           onSuccess: response => {
             showToast(response.message);
-            navigation.goBack();
+            router.back();
           },
           onError: error => {
             showToast(error.message);

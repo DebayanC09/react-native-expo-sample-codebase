@@ -2,12 +2,12 @@ import React, {useCallback, useMemo, useState} from "react";
 
 import {LayoutChangeEvent, Pressable, View} from "react-native";
 
-import {useNavigation} from "@react-navigation/native";
+import {useRouter} from "expo-router";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 
 import {AppText} from "@/component";
 
-import {Back, Menu} from "assets/svg";
+import {Back, Menu} from "../../../../assets/svg";
 
 import {BaseAppBarStyle} from "./style";
 
@@ -31,7 +31,7 @@ const AppBar = ({
   rightViewContent,
 }: AppBarProps) => {
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
+  const router = useRouter();
   const [leftViewWidth, setLeftViewWidth] = useState(0);
   const [rightViewWidth, setRightViewWidth] = useState(0);
 
@@ -62,7 +62,7 @@ const AppBar = ({
             if (onBackPress) {
               onBackPress();
             } else {
-              navigation.goBack();
+              router.back();
             }
           }}>
           <Back width={24} height={24} />
@@ -70,7 +70,7 @@ const AppBar = ({
       );
     }
     return null;
-  }, [showBack, onBackPress, navigation]);
+  }, [onBackPress, router, showBack]);
 
   const leftView = useMemo(() => {
     return (
