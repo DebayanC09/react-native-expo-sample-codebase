@@ -31,7 +31,7 @@ const appConfig = ({config}: ConfigContext): ExpoConfig => ({
   extra: {
     apiBaseUrl: process.env.EXPO_PUBLIC_API_BASE_URL,
   },
-  plugins: ["expo-router"],
+  plugins: [["expo-router"]],
 });
 
 export default appConfig;
